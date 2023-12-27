@@ -19,7 +19,7 @@ export class SeedService {
   private async insertNewProducts() {
     await this.productsService.deleteAllProducts();
 
-    const products = initialData.products;
+    /* const products = initialData.products;
 
     const insertPromises = [];
 
@@ -27,7 +27,7 @@ export class SeedService {
       insertPromises.push(this.productsService.create(product));
     });
 
-    await Promise.all(insertPromises);
+    await Promise.all(insertPromises); */
 
 
     return true;

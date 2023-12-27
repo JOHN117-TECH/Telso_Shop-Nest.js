@@ -27,11 +27,17 @@ export class ProductsService {
     try {
 
       const { images = [], ...productDetails } = createProductDto;
+
+      
       //Creamos el registro
       const product = this.productRepository.create({
         ...productDetails,
-        images: images.map(image => this.productImageRepository.create({ url: image }))
+        images: images.map(image => this.productImageRepository.create({ url: image, alt: image }))
       })
+      /* const product = this.productRepository.create({
+        ...productDetails,
+        images: this.productImageRepository.create(images)
+      }) */
       // Lo grabo y lo impacto en la DB
       await this.productRepository.save(product);
 
@@ -60,11 +66,11 @@ export class ProductsService {
     const products = await queryBuilder.getMany()
 
     /* Asi las aplanamos las imagenes para que se ven como originalmente son */
-    return products.map((product) => ({
-      ...product,
-      images: product.images.map((image) => image.url)
-    }))
-
+    /*  return products.map((product) => ({
+       ...product,
+       images: product.images.map((image) => image.url)
+     }))
+  */
     /*  return queryBuilder.getMany(); */
   }
 
@@ -117,9 +123,12 @@ export class ProductsService {
         /* Con esto borramos las imagenes anteriores */
         await queryRunner.manager.delete(ProductImage, { product: { id } })
 
-        product.images = images.map(
-          image => this.productImageRepository.create({ url: image })
-        );
+
+          /*  product.images = images.map(
+             image => this.productImageRepository.create({ url: image })
+           );*/
+          /* product.images = this.productImageRepository.create({ url: images.url, alt: images.alt }) */
+          ;
       }
 
       await queryRunner.manager.save(product)
