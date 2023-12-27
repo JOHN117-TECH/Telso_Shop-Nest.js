@@ -8,7 +8,6 @@ import {
     IsString,
     MinLength,
 } from "class-validator";
-import { ProductImage } from "../entities";
 
 
 export class CreateProductDto {

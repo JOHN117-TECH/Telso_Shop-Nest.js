@@ -10,9 +10,9 @@ export class ProductImage {
     @Column('text')
     url:string;
 
-    @Column('text')
+   /*  @Column('text')
     alt:string;
-
+ */
     /*
     * Muchas Imagenes pueden tener un unico producto 
     */
