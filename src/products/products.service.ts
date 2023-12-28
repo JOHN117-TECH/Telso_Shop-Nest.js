@@ -26,20 +26,20 @@ export class ProductsService {
 
     try {
 
-      const { images= [], ...productDetails } = createProductDto;
+      const { images= [{}], ...productDetails } = createProductDto;
      
       console.log({images})
       
       //Creamos el registro
-      /* const product = this.productRepository.create({
+      const product = this.productRepository.create({
         ...productDetails,
-        images: images.map(image => this.productImageRepository.create({ url: image.url, alt: image.alt }))
-      }) */
+        images: images.map((image:ProductImage) => this.productImageRepository.create({ url: image.url, alt: image.alt }))
+      })
         // Crear la entidad de producto
-        const product = this.productRepository.create({
+        /* const product = this.productRepository.create({
             ...productDetails,
             images: images.map(image => this.productImageRepository.create({ url: image }))
-        });
+        }); */
 
         
       // Lo grabo y lo impacto en la DB

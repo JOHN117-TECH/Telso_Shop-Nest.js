@@ -8,6 +8,7 @@ import {
     IsString,
     MinLength,
 } from "class-validator";
+import { ProductImage } from "../entities";
 
 
 export class CreateProductDto {
@@ -46,9 +47,8 @@ export class CreateProductDto {
     @IsOptional()
     tags?: string[];
 
-    @IsString({each: true})
     @IsArray()
     @IsOptional()
-    images?:string[];
+    images?:ProductImage[];
 
 }

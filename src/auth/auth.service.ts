@@ -2,6 +2,8 @@ import { BadRequestException, Injectable, InternalServerErrorException } from '@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import * as bcrypt from 'bcryptjs';
+
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 
@@ -22,7 +24,12 @@ export class AuthService {
 
     try {
 
-      const user = this.userRepository.create(createAuthDto)
+      const { password, ...userData } = createAuthDto;
+
+      const user = this.userRepository.create({
+        ...userData,
+        password: bcrypt.hashSync(password, 10)
+      })
 
       await this.userRepository.save(user);
 
