@@ -10,7 +10,7 @@ export class ProductImage {
     @Column('text')
     url:string;
 
-   /*  @Column('text')
+  /*   @Column('text')
     alt:string;
  */
     /*
